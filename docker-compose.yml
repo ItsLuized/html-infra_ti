@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  web1:
+    build: . #have to point to the folder containing the Dockerfile
+    volumes:
+      - /home/luized/images:/usr/share/nginx/html/images
+    ports:
+      - 80:80
+
+  web2:
+    build: .
+    volumes:
+      - /home/luized/images:/usr/share/nginx/html/images
+    ports:
+      - 81:80

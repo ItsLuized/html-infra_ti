@@ -17,7 +17,7 @@ The goal was to have a NFS that could change images in this html...
 
 So, at the time of running the docker, the following command was used:
 
-`sudo docker run -it --rm -d -p 8080:80 --name web -v ~/images:/usr/share/nginx/html/images webserver`\
+`sudo docker run -it --rm -d -p 8080:80 --name web -v ~/images:/usr/share/nginx/html/images webserver`
 
 -p binds port 80 of the container to TCP port 8080 of the host machine, and can be changed as desired \
 _{host machine port}:{port of the container}_
