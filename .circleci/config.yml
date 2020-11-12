@@ -20,8 +20,8 @@ jobs:
     - image: buildpack-deps:trusty
     steps:
       - add_ssh_keys:
-          fingerprints:
-          - "de:41:53:40:a9:63:44:97:c7:cb:69:68:bc:6d:aa:ba"
+        fingerprints:
+        - "de:41:53:40:a9:63:44:97:c7:cb:69:68:bc:6d:aa:ba"
       - run:
         name: Deploy Over SSH
         command: |
@@ -31,12 +31,12 @@ jobs:
     - image: buildpack-deps:trusty
     steps:
       - add_ssh_keys:
-          fingerprints:
-          - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
+        fingerprints:
+        - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
       - run:
-      name: Deploy Over SSH
-      command: |
-        ssh $SSH_USER@$SSH_HOST_DEV "cd html-infra_ti && git pull origin dev && git checkout dev && sudo docker-compose up --build -d"
+        name: Deploy Over SSH
+        command: |
+          ssh $SSH_USER@$SSH_HOST_DEV "cd html-infra_ti && git pull origin dev && git checkout dev && sudo docker-compose up --build -d"
   
 
 
