@@ -21,3 +21,17 @@ So, at the time of running the docker, the following command was used:
 
 -p binds port 80 of the container to TCP port 8080 of the host machine, and can be changed as desired \
 _{host machine port}:{port of the container}_
+
+---
+
+### To deploy two images as is intended for the project
+
+We used Docker-compose
+the following command used:
+
+`docker-compose up --build -d`
+
+this builds the images and runs then
+
+- `--build`: builds the image before running them
+- `-d`: makes it run deatached

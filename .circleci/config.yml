@@ -1,0 +1,67 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/base:2020.11
+      steps:
+      - checkout
+      - run:
+          name: Pull super-linter Image
+          commands: |
+            docker pull github/super-linter:latest
+      - run:
+          name: Lint with super-lint
+          commands: |
+            docker run -e RUN_LOCAL=true -v $(pwd)/index.html:/tmp/lint/index.html github/super-linter
+  
+  deploy-Prod:
+    docker:
+      - image: cimg/base:2020.11
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+          - "de:41:53:40:a9:63:44:97:c7:cb:69:68:bc:6d:aa:ba"
+      - run:
+        name: Deploy Over SSH
+        command: |
+          ssh $SSH_USER@$SSH_HOST_PROD "cd html-infra_ti && git pull origin master && sudo docker-compose up --build -d"
+  deploy-Dev:
+    steps:
+      - add_ssh_keys:
+        fingerprints:
+        - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
+      - run:
+      name: Deploy Over SSH
+      command: |
+        ssh $SSH_USER@$SSH_HOST_DEV "cd html-infra_ti && git pull origin dev && git checkout dev && sudo docker-compose up --build -d"
+  
+
+
+
+# Orchestrate or schedule a set of jobs
+workflows:
+  # Name the workflow "welcome"
+  lint:
+    # Run the welcome/run job in its own container
+    jobs:
+      - lint:
+        filters:  # using regex filters requires the entire branch to match
+          branches:
+            only:  # only branches matching the below regex filters will run
+              - master
+              - dev
+      - deploy-Dev:
+        requires:
+          - lint
+          filters:
+            branches:
+              only:
+              - master
+      - deploy-Prod:
+        requires:
+          - lint
+          filters:
+            branches:
+              only:
+              - dev
