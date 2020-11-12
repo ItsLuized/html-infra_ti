@@ -13,8 +13,8 @@ jobs:
           command: |
             docker run -e RUN_LOCAL=true -v $(pwd)/index.html:/tmp/lint/index.html github/super-linter
   deploy-Prod:
-    docker: # executor type
-      - image: cimg/base:2020.01
+    machine: # executor type
+      enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -25,8 +25,8 @@ jobs:
             ssh $SSH_USER@$SSH_HOST_PROD "cd html-infra_ti && git pull origin master && sudo docker-compose up --build -d"
 
   deploy-Dev:
-    docker: # executor type
-      - image: cimg/base:2020.01
+    machine: # executor type
+      enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
