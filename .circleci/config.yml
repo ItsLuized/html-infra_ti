@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   lint:
     docker: # executor type
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2020.01
     steps:
       - run:
           name: Pull last super-linter version
@@ -14,7 +14,7 @@ jobs:
             docker run -e RUN_LOCAL=true -v $(pwd)/index.html:/tmp/lint/index.html github/super-linter
   deploy-Prod:
     docker: # executor type
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2020.01
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -26,7 +26,7 @@ jobs:
 
   deploy-Dev:
     docker: # executor type
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2020.01
     steps:
       - add_ssh_keys:
           fingerprints:
