@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   lint:
-    docker: # executor type
-      - image: cimg/base:2020.01
+    machine: # executor type
+      enabled: true
     steps:
       - run:
           name: Pull last super-linter version
