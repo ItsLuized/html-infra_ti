@@ -31,8 +31,8 @@ jobs:
     - image: buildpack-deps:trusty
     steps:
       - add_ssh_keys:
-        fingerprints:
-        - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
+          fingerprints:
+          - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
       - run:
       name: Deploy Over SSH
       command: |
