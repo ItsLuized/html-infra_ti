@@ -1,0 +1,57 @@
+version: 2.1
+jobs:
+  lint:
+    machine: # executor type
+      enabled: true
+    steps:
+      - run:
+          name: Pull last super-linter version
+          command: |
+            docker pull github/super-linter:latest
+      - run:
+          name: Run super-linter on index.html
+          command: |
+            docker run -e RUN_LOCAL=true -v $(pwd)/index.html:/tmp/lint/index.html github/super-linter
+  deploy-Prod:
+    machine: # executor type
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "de:41:53:40:a9:63:44:97:c7:cb:69:68:bc:6d:aa:ba"
+      - run:
+          name: Deploy to production server
+          command: |
+            ssh $SSH_USER@$SSH_HOST_PROD "cd html-infra_ti && git pull origin master && sudo docker-compose up --build -d"
+
+  deploy-Dev:
+    machine: # executor type
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "02:ee:86:0f:01:6e:8d:de:01:f3:30:55:88:f6:1d:2a"
+      - run:
+          name: Deploy to Development server
+          command: |
+            ssh $SSH_USER@$SSH_HOST_DEV "cd html-infra_ti && git pull origin dev && git checkout dev && sudo docker-compose up --build -d"
+
+workflows:
+  version: 2
+  lint_and_deploy:
+    jobs:
+      - lint
+      - deploy-Prod:
+          requires:
+            - lint
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-Dev:
+          requires:
+            - lint
+          filters:
+            branches:
+              only:
+                - dev
