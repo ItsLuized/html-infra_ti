@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Deploy to production server
           command: |
-            ssh $SSH_USER@$SSH_HOST_PROD "cd html-infra_ti && git pull origin master && sudo docker-compose up --build -d"
+            ssh $SSH_USER@$SSH_HOST_PROD "cd html-infra_ti && git pull origin master && git checkout master && sudo docker-compose up --build -d"
 
   deploy-Dev:
     machine: # executor type
