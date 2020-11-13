@@ -2,16 +2,16 @@
 
 Final project for the class IT Infrastructure
 
-### What we did
+## What we did
 
 In the Dockerfile make a custom image of a nginx docker image, replacing the default html with this repo
 
-### To build the custom image use the following command:
+## To build the custom image use the following command:
 
 `docker build -t webserver .`\
 Where "webserver" is the name of the image (Can be changed to the desired name)
 
-### Steps to use this docker as intended
+## Steps to use this docker as intended
 
 The goal was to have a NFS that could change images in this html...
 
@@ -24,7 +24,7 @@ _{host machine port}:{port of the container}_
 
 ---
 
-### To deploy two images as is intended for the project
+## To deploy two images as is intended for the project
 
 We used Docker-compose
 the following command used:
