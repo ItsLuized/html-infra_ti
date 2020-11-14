@@ -4,7 +4,7 @@ jobs:
     machine: # executor type
       enabled: true
     steps:
-      - run: checkout
+      - checkout
       - run: ls -all
       - run:
           name: Pull last super-linter version
@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Run super-linter on index.html
           command: |
-            docker run -e RUN_LOCAL=true -v $PWD/index.html:/tmp/lint/index.html github/super-linter
+            docker run -e RUN_LOCAL=true -v $PWD/html-infra_ti/index.html:/tmp/lint/index.html github/super-linter
 
   deploy-Prod:
     machine: # executor type
