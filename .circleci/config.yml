@@ -41,7 +41,7 @@ workflows:
   lint_and_deploy:
     jobs:
       - lint
-      - request-deploy_approval:
+      - request-deploy-approval:
           type: approval
           requires:
             - lint
