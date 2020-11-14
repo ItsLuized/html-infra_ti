@@ -47,14 +47,14 @@ workflows:
             - lint
       - deploy-Prod:
           requires:
-            - request-deploy_approval
+            - request-deploy-approval
           filters:
             branches:
               only:
                 - master
       - deploy-Dev:
           requires:
-            - request-deploy_approval
+            - request-deploy-approval
           filters:
             branches:
               only:
