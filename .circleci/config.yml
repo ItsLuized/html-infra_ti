@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Run super-linter on index.html
           command: |
+            ls -al
             docker run -e RUN_LOCAL=true -v $PWD/index.html:/tmp/lint/index.html github/super-linter
 
   deploy-Prod:
