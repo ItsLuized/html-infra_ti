@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Run super-linter on index.html
           command: |
-            docker run -e RUN_LOCAL=true -v $(pwd):/tmp/lint/ github/super-linter
+            pwd && docker run -e RUN_LOCAL=true -v $(pwd):/tmp/lint/ github/super-linter
   deploy-Prod:
     machine: # executor type
       enabled: true
