@@ -41,16 +41,20 @@ workflows:
   lint_and_deploy:
     jobs:
       - lint
-      - deploy-Prod:
+      - request-deploy-approval:
+          type: approval
           requires:
             - lint
+      - deploy-Prod:
+          requires:
+            - request-deploy-approval
           filters:
             branches:
               only:
                 - master
       - deploy-Dev:
           requires:
-            - lint
+            - request-deploy-approval
           filters:
             branches:
               only:
