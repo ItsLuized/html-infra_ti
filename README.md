@@ -1,3 +1,5 @@
+[![ItsLuized](https://circleci.com/gh/ItsLuized/html-infra_ti.svg?style=svg)](https://app.circleci.com/pipelines/github/ItsLuized/html-infra_ti?branch=master)
+
 # HTML-INFRA_TI
 
 Final project for the class IT Infrastructure
